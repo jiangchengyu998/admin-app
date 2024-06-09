@@ -1,4 +1,5 @@
 import React, { useRef, useState} from 'react';
+import FlotChart from "../chart";
 
 function Dashboard(props) {
     const [state, setState] = useState({
@@ -92,13 +93,13 @@ function Dashboard(props) {
                             <div className="row">
                                 <div className="col-lg-9">
                                     <div className="flot-chart">
-                                        {/*<div className="flot-chart-content" id="flot-dashboard-chart">asfdf</div>*/}
-                                        <div id="flot-dashboard-chart" ref={chartRef}
-                                             style={{width: '600px', height: '400px'}}></div>
+                                        <div className="flot-chart-content">
+                                            <FlotChart/>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="col-lg-3">
-                                <ul className="stat-list">
+                                     <ul className="stat-list">
                                         <li>
                                             <h2 className="no-margins">2,346</h2>
                                             <small>Total orders in period</small>
