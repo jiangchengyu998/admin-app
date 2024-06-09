@@ -119,7 +119,7 @@ $(document).ready(function () {
         var heightWithoutNavbar = $("body > #wrapper").height() - 61;
         $(".sidebard-panel").css("min-height", heightWithoutNavbar + "px");
 
-        var navbarHeigh = $('nav.navbar-default').height();
+        var navbarHeigh = $('Nav.navbar-default').height();
         var wrapperHeigh = $('#page-wrapper').height();
 
         if (navbarHeigh > wrapperHeigh) {
@@ -218,7 +218,7 @@ $(document).ready(function () {
 
         if (fixednavbar == 'on') {
             $(".navbar-static-top").removeClass('navbar-static-top').addClass('navbar-fixed-top');
-            body.addClass('fixed-nav');
+            body.addClass('fixed-Nav');
         }
 
         if (boxedlayout == 'on') {

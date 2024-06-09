@@ -403,7 +403,7 @@
                     details.target = 'td:first-child';
                 }
 
-                // type.target can be a string jQuery selector or a column index
+                // type.target can be a string jQuery selector or a column Index
                 var target   = details.target;
                 var selector = typeof target === 'string' ? target : 'td';
 
@@ -420,7 +420,7 @@
                         return;
                     }
 
-                    // For column index, we determine if we should act or not in the
+                    // For column Index, we determine if we should act or not in the
                     // handler - otherwise it is already okay
                     if ( typeof target === 'number' ) {
                         var targetIdx = target < 0 ?
@@ -700,7 +700,7 @@
                             dtPrivate, idx.row, idx.column, 'display'
                         );
 
-                        return '<li data-dtr-index="'+idx.column+'">'+
+                        return '<li data-dtr-Index="'+idx.column+'">'+
                             '<span class="dtr-title">'+
                             header.text()+':'+
                             '</span> '+
@@ -711,7 +711,7 @@
                     } ).toArray().join('');
 
                     return data ?
-                        $('<ul data-dtr-index="'+rowIdx+'"/>').append( data ) :
+                        $('<ul data-dtr-Index="'+rowIdx+'"/>').append( data ) :
                         false;
                 },
 
@@ -741,12 +741,12 @@
             } );
         } );
 
-        Api.register( 'responsive.index()', function ( li ) {
+        Api.register( 'responsive.Index()', function ( li ) {
             li = $(li);
 
             return {
-                column: li.data('dtr-index'),
-                row:    li.parent().data('dtr-index')
+                column: li.data('dtr-Index'),
+                row:    li.parent().data('dtr-Index')
             };
         } );
 

@@ -308,7 +308,7 @@
 			}
 			else if (this.component && this.hasInput){ // component: input + button
 				this._events = [
-					// For components that are not readonly, allow keyboard nav
+					// For components that are not readonly, allow keyboard Nav
 					[this.element.find('input'), {
 						focus: $.proxy(this.show, this),
 						keyup: $.proxy(function(e){
