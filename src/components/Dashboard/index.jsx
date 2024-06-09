@@ -1,6 +1,19 @@
-import React from 'react';
+import React, { useRef, useState} from 'react';
 
 function Dashboard(props) {
+    const [state, setState] = useState({
+        monthAccount: 5000,
+        monthPercent: "2%",
+        orderNumber: 50,
+        orderPercent: "30%",
+        visitNumber: 50,
+        visitPercent: "40%",
+        refundNumber: 50,
+        refundPercent: "40%",
+    });
+
+    const chartRef = useRef(null);
+
     return (
         <div className="wrapper wrapper-content">
             <div className="row">
@@ -11,9 +24,10 @@ function Dashboard(props) {
                             <h5>当前月收入(元)</h5>
                         </div>
                         <div className="ibox-content">
-                            <h1 className="no-margins">--月收入啦啦</h1>
-                            <div className="stat-percent font-bold text-success" text="${stats.incomePer}">月收入环比<i
-                                className="fa fa-level-up"></i></div>
+                            <h1 className="no-margins">{state.monthAccount}</h1>
+                            <div className="stat-percent font-bold text-success">{state.monthPercent}
+                                <i className="fa fa-level-up"></i>
+                            </div>
                             <small>Monthly income</small>
                         </div>
                     </div>
@@ -25,9 +39,8 @@ function Dashboard(props) {
                             <h5>当前月订单数</h5>
                         </div>
                         <div className="ibox-content">
-                            <h1 className="no-margins" text="${stats.mOrderNum}">--月订单数</h1>
-                            <div className="stat-percent font-bold text-info" text="${stats.orderNumPer}">20% <i
-                                className="fa fa-level-up"></i></div>
+                            <h1 className="no-margins">{state.orderNumber}</h1>
+                            <div className="stat-percent font-bold text-info">{state.orderPercent} <i className="fa fa-level-up"></i></div>
                             <small>Monthly orders</small>
                         </div>
                     </div>
@@ -39,8 +52,8 @@ function Dashboard(props) {
                             <h5>访问量</h5>
                         </div>
                         <div className="ibox-content">
-                            <h1 className="no-margins" text="${stats.pv}">--访问量</h1>
-                            <div className="stat-percent font-bold text-navy">44% <i
+                            <h1 className="no-margins">{state.visitNumber}</h1>
+                            <div className="stat-percent font-bold text-navy">{state.visitPercent} <i
                                 className="fa fa-level-up"></i></div>
                             <small>New visits</small>
                         </div>
@@ -53,9 +66,8 @@ function Dashboard(props) {
                             <h5>当前月退单数</h5>
                         </div>
                         <div className="ibox-content">
-                            <h1 className="no-margins" text="${stats.mOrderRefund}">80,600</h1>
-                            <div className="stat-percent font-bold text-danger"
-                                 text="${stats.mOrderRefundPer}">38%
+                            <h1 className="no-margins">{state.refundNumber}</h1>
+                            <div className="stat-percent font-bold text-danger">{state.refundPercent}
                             </div>
                             <small>Monthly refund</small>
                         </div>
@@ -80,13 +92,13 @@ function Dashboard(props) {
                             <div className="row">
                                 <div className="col-lg-9">
                                     <div className="flot-chart">
-                                        <div className="flot-chart-content" id="flot-dashboard-chart"></div>
-                                        <input type="hidden" id="data2" value="${data2}"/>
-                                        <input type="hidden" id="data3" value="${data3}"/>
+                                        {/*<div className="flot-chart-content" id="flot-dashboard-chart">asfdf</div>*/}
+                                        <div id="flot-dashboard-chart" ref={chartRef}
+                                             style={{width: '600px', height: '400px'}}></div>
                                     </div>
                                 </div>
                                 <div className="col-lg-3">
-                                    <ul className="stat-list">
+                                <ul className="stat-list">
                                         <li>
                                             <h2 className="no-margins">2,346</h2>
                                             <small>Total orders in period</small>

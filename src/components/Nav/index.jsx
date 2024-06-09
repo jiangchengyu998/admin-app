@@ -41,11 +41,11 @@ function Nav(props) {
                                 <span className="nav-label">
                                     <NavLink to="/itemManager">商品列表</NavLink>
                                 </span>
-                                <span className="fa arrow"></span>
+                                {/*<span className="fa arrow"></span>*/}
                             </a>
 
                         </li>
-
+                        {/*
                         <li>
                             <a href="#">
                                 <i className="fa fa-bar-chart-o"></i>
@@ -79,7 +79,7 @@ function Nav(props) {
                                 <li id="userManage"><a href="@{userManage}">信息修改</a></li>
                             </ul>
                         </li>
-
+                        */}
                     </ul>
                 </div>
             </nav>
