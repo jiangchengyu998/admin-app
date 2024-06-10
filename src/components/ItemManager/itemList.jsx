@@ -8,6 +8,11 @@ function ItemList(props) {
         {'id':'003','title': '小米手机','category':'手机', 'price':6000.00,'store':4000,'updateTime':'2024-01-01'},
     ])
 
+
+    const updateItem = (item) => {
+        console.log('Button clicked',item);
+    };
+
     return (
         <div className="col-lg-12">
             <div className="ibox float-e-margins">
@@ -42,12 +47,12 @@ function ItemList(props) {
                                     <td>{item.price}</td>
                                     <td>{item.store}</td>
                                     <td>{item.updateTime}</td>
-
                                     <td>
-                                        <a href="../static'itemEdit?id='+${item.id}}" title="修改"><i
-                                            className="fa fa-edit text-navy"></i></a>
+                                        <a onClick={()=>updateItem(item)} title="修改">
+                                            <i className="fa fa-edit text-navy"></i>
+                                        </a>
                                         &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <a href="#" onClick="'javascript:updateState('+${item.id}+',2,0);'"
+                                        <a href="#" onClick={()=>updateItem(item)}
                                            title="删除"><i className="fa fa-trash-o text-navy"></i></a>
                                     </td>
                                 </tr>

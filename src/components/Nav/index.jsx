@@ -10,7 +10,8 @@ function Nav(props) {
                         <li className="nav-header">
                             <div className="dropdown profile-element">
                     	<span>
-                            <img alt="image" className="img-circle" src="/public/img/cat.jpg" height="48px" width="48px"/>
+                            <img alt="image" className="img-circle" src="/public/img/cat.jpg" height="48px"
+                                 width="48px"/>
 						</span>
                                 <a data-toggle="dropdown" className="dropdown-toggle" href="#">
                             <span className="clear">
