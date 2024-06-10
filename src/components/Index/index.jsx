@@ -5,6 +5,7 @@ import Header from "../Header";
 import Dashboard from "../Dashboard";
 import {Route, Routes} from "react-router-dom";
 import ItemManager from "../ItemManager";
+import ItemEdit from "../ItemManager/itemEdit";
 
 function Index(props) {
     return (
@@ -16,6 +17,7 @@ function Index(props) {
                 <Routes>
                     <Route path="/dashboard" element={<Dashboard/>}/>
                     <Route path="/itemManager" element={<ItemManager/>}/>
+                    <Route path="/itemEdit" element={<ItemEdit/>}/>
                 </Routes>
                 <Footer/>
             </div>

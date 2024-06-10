@@ -1,0 +1,112 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    margin: 20px;
+    padding: 0;
+}
+
+h1 {
+    margin-top: 0;
+    font-size: 22px;
+}
+
+h2 {
+    margin-top: 0;
+    font-size: 20px;
+}
+
+h3 {
+    margin-top: 0;
+    font-size: 18px;
+}
+
+h4 {
+    margin-top: 0;
+    font-size: 16px;
+}
+
+h5 {
+    margin-top: 0;
+    font-size: 14px;
+}
+
+h6 {
+    margin-top: 0;
+    font-size: 12px;
+}
+
+code {
+    font-size: 1.2em;
+}
+
+ul {
+    padding-inline-start: 20px;
+}
+
+.clipping-container {
+    position: relative;
+    border: 1px solid #aaa;
+    margin-bottom: 12px;
+    padding: 12px;
+    width: 250px;
+    height: 80px;
+    overflow: hidden;
+}
+
+.modal {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
+    background-color: white;
+    border: 2px solid rgb(240, 240, 240);
+    border-radius: 12px;
+    position:  absolute;
+    width: 250px;
+    top: 70px;
+    left: calc(50% - 125px);
+    bottom: 70px;
+}
+/*.hanke-test {*/
+/*    display: flex;*/
+/*    justify-content: space-evenly;*/
+/*    align-items: center;*/
+/*    box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;*/
+/*    background-color: white;*/
+/*    border: 2px solid rgb(240, 240, 240);*/
+/*    border-radius: 12px;*/
+/*    position:  absolute;*/
+/*    top: 7px;*/
+/*    left: calc(50% - 125px);*/
+/*    bottom: 7px;*/
+/*}*/
+.hanke-test {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal {
+    display: flex;
+    justify-content: center; /* 居中内容 */
+    align-items: flex-start; /* 将内容对齐到顶部 */
+    box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
+    background-color: white;
+    border: 2px solid rgb(240, 240, 240);
+    border-radius: 12px;
+    position: fixed; /* 使用 fixed 定位 */
+    width: 1000px; /* 设置弹窗宽度 */
+    top: 10%; /* 距离顶部10% */
+    left: 50%; /* 水平居中 */
+    transform: translateX(-50%); /* 水平居中 */
+    z-index: 1000; /* 确保弹窗在最上层 */
+    padding: 20px; /* 内边距 */
+}

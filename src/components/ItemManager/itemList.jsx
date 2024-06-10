@@ -1,4 +1,8 @@
 import React, {useState} from 'react';
+import {createPortal} from "react-dom";
+import ItemEdit from "./itemEdit";
+import "./styles.css";
+import {Link, NavLink} from "react-router-dom";
 
 function ItemList(props) {
 
@@ -48,11 +52,15 @@ function ItemList(props) {
                                     <td>{item.store}</td>
                                     <td>{item.updateTime}</td>
                                     <td>
-                                        <a onClick={()=>updateItem(item)} title="修改">
-                                            <i className="fa fa-edit text-navy"></i>
-                                        </a>
+
+                                        {/*<a title={"修改"}> */}
+                                        {/*    <i className="fa fa-edit text-navy"></i>*/}
+                                        {/*</a>*/}
+                                        <Link to="/itemEdit" state={{...item}}> 修改
+                                            <i className="fa fa-edit text-navy"/>
+                                        </Link>
                                         &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <a href="#" onClick={()=>updateItem(item)}
+                                        <a onClick={()=>updateItem(item)}
                                            title="删除"><i className="fa fa-trash-o text-navy"></i></a>
                                     </td>
                                 </tr>
