@@ -1,21 +1,49 @@
 import React, {useState} from 'react';
 import {createPortal} from "react-dom";
 import ItemEdit from "./itemEdit";
+import Modal from 'react-modal';
 import "./styles.css";
 import {Link, NavLink} from "react-router-dom";
+import {Pagination} from "./Pagination";
 
 function ItemList(props) {
 
-    const [state, setState] = useState([
+    const [products, setProducts] = useState([
         {'id':'001','title': '华为手机','category':'手机', 'price':6000.00,'store':4000,'updateTime':'2024-01-01'},
         {'id':'002','title': '苹果手机','category':'手机', 'price':8000.00,'store':4000,'updateTime':'2024-01-01'},
         {'id':'003','title': '小米手机','category':'手机', 'price':6000.00,'store':4000,'updateTime':'2024-01-01'},
+        {'id':'004','title': '小米手机1','category':'手机', 'price':6000.00,'store':4000,'updateTime':'2024-01-01'},
+        {'id':'005','title': '小米手机2','category':'手机', 'price':6000.00,'store':4000,'updateTime':'2024-01-01'},
+        {'id':'006','title': '小米手机3','category':'手机', 'price':6000.00,'store':4000,'updateTime':'2024-01-01'},
+        {'id':'007','title': '小米手机4','category':'手机', 'price':6000.00,'store':4000,'updateTime':'2024-01-01'},
     ])
+    const [productToDelete, setProductToDelete] = useState(null);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-
-    const updateItem = (item) => {
-        console.log('Button clicked',item);
+    const openDeleteModal = (product) => {
+        setProductToDelete(product);
+        setIsDeleteModalOpen(true);
     };
+    const closeDeleteModal = () => {
+        setIsDeleteModalOpen(false);
+        setProductToDelete(null);
+    };
+
+    const handleDelete = () => {
+        setProducts(products.filter(product => product.id !== productToDelete.id));
+        closeDeleteModal();
+    };
+
+    const itemsPerPage = 5;  // 每页显示的商品数量
+    const [currentPage, setCurrentPage] = useState(1);
+
+    // 获取当前页的商品
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentProducts = products.slice(indexOfFirstItem, indexOfLastItem);
+
+    // 改变页码
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
         <div className="col-lg-12">
@@ -43,7 +71,7 @@ function ItemList(props) {
                             </tr>
                             </thead>
                             <tbody>
-                            {state.map((item, index) => (
+                            {currentProducts.map((item, index) => (
                                 <tr key={item.id}>
                                     <td>{item.id}</td>
                                     <td>{item.title}</td>
@@ -56,24 +84,31 @@ function ItemList(props) {
                                         {/*<a title={"修改"}> */}
                                         {/*    <i className="fa fa-edit text-navy"></i>*/}
                                         {/*</a>*/}
-                                        <Link to="/itemEdit" state={{...item}}> 修改
-                                            <i className="fa fa-edit text-navy"/>
-                                        </Link>
+                                        <Link to="/itemEdit" state={{...item}}> 修改 <i className="fa fa-edit text-navy"/></Link>
                                         &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <a onClick={()=>updateItem(item)}
-                                           title="删除"><i className="fa fa-trash-o text-navy"></i></a>
+                                        <a onClick={()=>openDeleteModal(item)} title="删除"><i className="fa fa-trash-o text-navy"></i></a>
                                     </td>
                                 </tr>
                             ))}
-
+                            <Pagination
+                                itemsPerPage={itemsPerPage}
+                                totalItems={products.length}
+                                paginate={paginate}
+                                currentPage={currentPage}
+                            />
+                            <Modal
+                                isOpen={isDeleteModalOpen}
+                                onRequestClose={closeDeleteModal}
+                                contentLabel="确认删除"
+                                className="delete-modal"
+                                overlayClassName="delete-modal-overlay"
+                            >
+                                <h2>确认删除</h2>
+                                <p>你确定要删除 {productToDelete && productToDelete.title} 吗？</p>
+                                <button onClick={handleDelete}>确认</button>
+                                <button onClick={closeDeleteModal}>取消</button>
+                            </Modal>
                             </tbody>
-                            <tfoot>
-                            <tr>
-                                <td colSpan="8">
-                                    <ul id="pageHTML" className="pagination pull-right"></ul>
-                                </td>
-                            </tr>
-                            </tfoot>
                         </table>
                     </div>
                 </div>
