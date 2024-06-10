@@ -6,6 +6,8 @@ import "./styles.css";
 import {Link, NavLink} from "react-router-dom";
 import {Pagination} from "./Pagination";
 
+Modal.setAppElement('#root'); // 确保根元素设置正确
+
 function ItemList(props) {
 
     const [products, setProducts] = useState([
@@ -86,30 +88,32 @@ function ItemList(props) {
                                         {/*</a>*/}
                                         <Link to="/itemEdit" state={{...item}}> 修改 <i className="fa fa-edit text-navy"/></Link>
                                         &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <a onClick={()=>openDeleteModal(item)} title="删除"><i className="fa fa-trash-o text-navy"></i></a>
+                                        <a onClick={()=>openDeleteModal(item)} title={"删除"}>
+                                            <i className="fa fa-trash-o text-navy"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             ))}
-                            <Pagination
-                                itemsPerPage={itemsPerPage}
-                                totalItems={products.length}
-                                paginate={paginate}
-                                currentPage={currentPage}
-                            />
-                            <Modal
-                                isOpen={isDeleteModalOpen}
-                                onRequestClose={closeDeleteModal}
-                                contentLabel="确认删除"
-                                className="delete-modal"
-                                overlayClassName="delete-modal-overlay"
-                            >
-                                <h2>确认删除</h2>
-                                <p>你确定要删除 {productToDelete && productToDelete.title} 吗？</p>
-                                <button onClick={handleDelete}>确认</button>
-                                <button onClick={closeDeleteModal}>取消</button>
-                            </Modal>
                             </tbody>
                         </table>
+                        <Pagination
+                            itemsPerPage={itemsPerPage}
+                            totalItems={products.length}
+                            paginate={paginate}
+                            currentPage={currentPage}
+                        />
+                        <Modal
+                            isOpen={isDeleteModalOpen}
+                            onRequestClose={closeDeleteModal}
+                            contentLabel="确认删除"
+                            className="delete-modal"
+                            overlayClassName="delete-modal-overlay"
+                        >
+                            <h2>确认删除</h2>
+                            <p>你确定要删除 {productToDelete && productToDelete.title} 吗？</p>
+                            <button onClick={handleDelete}>确认</button>
+                            <button onClick={closeDeleteModal}>取消</button>
+                        </Modal>
                     </div>
                 </div>
             </div>
