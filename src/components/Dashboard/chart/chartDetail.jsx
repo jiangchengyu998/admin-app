@@ -1,18 +1,7 @@
 import React from 'react';
-import { Line } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'chart.js';
+import {Line} from "react-chartjs-2";
 
-ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend
-);
-
-const ChartComponent = () => {
+function ChartDetail(props) {
     const data = {
         labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
         datasets: [
@@ -43,7 +32,7 @@ const ChartComponent = () => {
                 position: 'top',
             },
             title: {
-                display: true,
+                display: false,
                 text: '订单量和收入图表',
             },
         },
@@ -72,10 +61,16 @@ const ChartComponent = () => {
     };
 
     return (
-        <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-            <Line data={data} options={options} />
+        <div className="col-lg-9">
+            <div className="flot-chart">
+                <div className="flot-chart-content">
+                    <div style={{position: 'relative', width: '100%', height: '100%'}}>
+                        <Line data={data} options={options}/>
+                    </div>
+                </div>
+            </div>
         </div>
     );
-};
+}
 
-export default ChartComponent;
+export default ChartDetail;
