@@ -61,12 +61,10 @@ function ChartDetail(props) {
     };
 
     return (
-        <div className="col-lg-9">
-            <div className="flot-chart">
-                <div className="flot-chart-content">
-                    <div style={{position: 'relative', width: '100%', height: '100%'}}>
-                        <Line data={data} options={options}/>
-                    </div>
+        <div className="col-lg-9 flot-chart">
+            <div className="flot-chart-content">
+                <div style={{position: 'relative', width: '100%', height: '100%'}}>
+                    <Line data={data} options={options}/>
                 </div>
             </div>
         </div>
