@@ -3,7 +3,7 @@ import Nav from "../Nav";
 import Footer from "../Footer";
 import Header from "../Header";
 import Dashboard from "../Dashboard";
-import {Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 import ItemManager from "../ItemManager";
 import ItemEdit from "../ItemManager/itemEdit";
 
@@ -18,6 +18,8 @@ function Index(props) {
                     <Route path="/dashboard" element={<Dashboard/>}/>
                     <Route path="/itemManager" element={<ItemManager/>}/>
                     <Route path="/itemEdit" element={<ItemEdit/>}/>
+                    <Route path="/" element={<Navigate to="/dashboard"/>}/>
+
                 </Routes>
                 <Footer/>
             </div>
