@@ -1,11 +1,27 @@
 import React, {useState} from 'react';
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 function ItemEdit(props) {
     // console.log("ItemEdit",props)
     const {state} = useLocation()
     const [formData, setFormData] = useState(state);
-    console.log(state)
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevFormData) => ({
+            ...prevFormData,
+            [name]: value
+        }));
+    };
+    const navigate = useNavigate();
+    const handleSubmit = (e) => {
+        // 更新父组件的商品列表，后端更新数据
+        //     setProducts(products.map(product => product.id === updatedProduct.id ? updatedProduct : product));
+        console.log(formData)
+        e.preventDefault();
+        navigate("/itemManager");
+    };
+
+
     return (
         <div className="wrapper wrapper-content animated fadeInRight">
             <div className="row">
@@ -20,13 +36,13 @@ function ItemEdit(props) {
                             </div>
                         </div>
                         <div className="ibox-content">
-                            <form id="formTag" action="itemEdit" method="POST" className="form-horizontal"
+                            <form id="formTag" className="form-horizontal" onSubmit={handleSubmit}
                                   encType="multipart/form-data">
                                 <div className="form-group"><label className="col-sm-2 control-label">商品id：</label>
                                     <div className="col-sm-10">
                                         <input id="id" name="id" readOnly="readonly" type="text"
                                                className="form-control" value={formData.id}
-                                               onChange={(e) => setFormData(e.target.value)}/>
+                                        onChange={handleChange}/>
                                     </div>
                                 </div>
                                 <div className="hr-line-dashed"></div>
@@ -34,14 +50,15 @@ function ItemEdit(props) {
                                 <div className="form-group"><label className="col-sm-2 control-label">标题：</label>
                                     <div className="col-sm-10">
                                         <input id="title" name="title" type="text" className="form-control" value={formData.title}
-                                               onChange={(e) => setFormData(e.target.value)}/>
+                                               onChange={handleChange}/>
                                     </div>
                                 </div>
                                 <div className="hr-line-dashed"></div>
                                 <div className="form-group">
                                     <div className="col-sm-4 col-sm-offset-2">
                                         <button id="submitButton" className="btn btn-primary"
-                                                type="button">&nbsp;&nbsp;&nbsp;&nbsp;提&nbsp;&nbsp;&nbsp;&nbsp;交&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                                                type="submit">&nbsp;&nbsp;&nbsp;&nbsp;提&nbsp;&nbsp;&nbsp;&nbsp;交&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </button>
                                     </div>
                                 </div>
                             </form>
