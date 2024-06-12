@@ -2,7 +2,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 const ComponentB = () => {
-    const data = useSelector(state => state.data);
+    const {data,items} = useSelector(state => state);
+    console.log(items)
 
     return (
         <div>

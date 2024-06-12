@@ -5,20 +5,14 @@ import Modal from 'react-modal';
 import "./styles.css";
 import {Link, NavLink} from "react-router-dom";
 import {Pagination} from "./Pagination";
+import {useSelector} from "react-redux";
 
 Modal.setAppElement('#root'); // 确保根元素设置正确
 
 function ItemList(props) {
 
-    const [products, setProducts] = useState([
-        {'id':'001','title': '华为手机','category':'手机', 'price':6000.00,'store':4000,'updateTime':'2024-01-01'},
-        {'id':'002','title': '苹果手机','category':'手机', 'price':8000.00,'store':4000,'updateTime':'2024-01-01'},
-        {'id':'003','title': '小米手机','category':'手机', 'price':6000.00,'store':4000,'updateTime':'2024-01-01'},
-        {'id':'004','title': '小米手机1','category':'手机', 'price':6000.00,'store':4000,'updateTime':'2024-01-01'},
-        {'id':'005','title': '小米手机2','category':'手机', 'price':6000.00,'store':4000,'updateTime':'2024-01-01'},
-        {'id':'006','title': '小米手机3','category':'手机', 'price':6000.00,'store':4000,'updateTime':'2024-01-01'},
-        {'id':'007','title': '小米手机4','category':'手机', 'price':6000.00,'store':4000,'updateTime':'2024-01-01'},
-    ])
+    const products = useSelector(state => state.items);
+
     const [productToDelete, setProductToDelete] = useState(null);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -32,7 +26,7 @@ function ItemList(props) {
     };
 
     const handleDelete = () => {
-        setProducts(products.filter(product => product.id !== productToDelete.id));
+        // setProducts(products.filter(product => product.id !== productToDelete.id));
         closeDeleteModal();
     };
 

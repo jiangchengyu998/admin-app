@@ -1,8 +1,13 @@
 import React, {useState} from 'react';
 import {useLocation, useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {setItem} from "../../store/actions";
 
 function ItemEdit(props) {
+
+    const dispatch = useDispatch();
     // console.log("ItemEdit",props)
+    // 父组件传进来的
     const {state} = useLocation()
     const [formData, setFormData] = useState(state);
     const handleChange = (e) => {
@@ -15,8 +20,9 @@ function ItemEdit(props) {
     const navigate = useNavigate();
     const handleSubmit = (e) => {
         // 更新父组件的商品列表，后端更新数据
-        //     setProducts(products.map(product => product.id === updatedProduct.id ? updatedProduct : product));
         console.log(formData)
+        dispatch(setItem(formData))
+        //     setProducts(products.map(product => product.id === updatedProduct.id ? updatedProduct : product));
         e.preventDefault();
         navigate("/itemManager");
     };

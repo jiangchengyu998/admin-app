@@ -7,9 +7,9 @@ function App() {
   return (
     <div>
       {/*<Login/>*/}
-      {/*<Index/>*/}
-        <ComponentA />
-        <ComponentB />
+      <Index/>
+        {/*<ComponentA />*/}
+        {/*<ComponentB />*/}
     </div>
   );
 }
