@@ -1,17 +1,17 @@
 import React, {useState} from 'react';
-import {createPortal} from "react-dom";
-import ItemEdit from "./itemEdit";
 import Modal from 'react-modal';
 import "./styles.css";
-import {Link, NavLink} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {Pagination} from "./Pagination";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {removeItem} from "../../store/actions";
 
 Modal.setAppElement('#root'); // 确保根元素设置正确
 
 function ItemList(props) {
 
     const products = useSelector(state => state.items);
+    const dispatch = useDispatch();
 
     const [productToDelete, setProductToDelete] = useState(null);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -26,6 +26,7 @@ function ItemList(props) {
     };
 
     const handleDelete = () => {
+        dispatch(removeItem(productToDelete))
         // setProducts(products.filter(product => product.id !== productToDelete.id));
         closeDeleteModal();
     };

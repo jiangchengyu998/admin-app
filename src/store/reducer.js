@@ -1,4 +1,4 @@
-import {ITEM_LIST, SET_DATA} from './actions';
+import {ITEM_DELETE, ITEM_UPDATE, SET_DATA} from './actions';
 
 // 定义初始状态
 const initialState = {
@@ -71,13 +71,18 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 data: action.payload,
             };
-        case ITEM_LIST:
+        case ITEM_UPDATE:
             return {
                 ...state,
                 items: state.items.map((item, index) => {
                         return item.id === action.payload.id ? action.payload : item
                     }
                 ),
+            };
+        case ITEM_DELETE:
+            return {
+                ...state,
+                items: state.items.filter((item, index) => item.id !== action.payload.id),
             };
         default:
             return state;
