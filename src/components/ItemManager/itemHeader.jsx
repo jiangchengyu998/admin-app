@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 
 function ItemHeader(props) {
     return (
@@ -45,11 +46,9 @@ function ItemHeader(props) {
                     </form>
                     <div className="row">
                         <div className="col-sm-6 m-b-xs">
-                            <a href="../staticitemEdit}" className="btn btn-primary btn-sm"
-                               data-toggle="tooltip" data-placement="left" title=""
-                               data-original-title="Refresh inbox"><i
+                            <Link to={"/itemEdit"} className="btn btn-primary btn-sm"><i
                                 className="fa fa-plus"></i>&nbsp;&nbsp;&nbsp;&nbsp;新增商品&nbsp;&nbsp;&nbsp;&nbsp;
-                            </a>
+                            </Link>
                         </div>
                         <div className="col-sm-6 m-b-xs">
                         </div>

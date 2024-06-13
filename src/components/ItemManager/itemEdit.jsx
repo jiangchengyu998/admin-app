@@ -1,17 +1,19 @@
 import React, {useState} from 'react';
 import {useLocation, useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
-import {setItem} from "../../store/actions";
+import {addItem, updateItem} from "../../store/actions";
 
 function ItemEdit(props) {
 
     const dispatch = useDispatch();
-    // console.log("ItemEdit",props)
     // 父组件传进来的
-    const {state} = useLocation()
+    let {state} = useLocation()
+    let readonly = state !== null
+    state = state === null ? {'id': '9', 'title': ""} : state
+    console.log("ItemEdit", state)
     const [formData, setFormData] = useState(state);
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
         setFormData((prevFormData) => ({
             ...prevFormData,
             [name]: value
@@ -21,7 +23,7 @@ function ItemEdit(props) {
     const handleSubmit = (e) => {
         // 更新父组件的商品列表，后端更新数据
         console.log(formData)
-        dispatch(setItem(formData))
+        dispatch(readonly ? updateItem(formData) : addItem(formData))
         //     setProducts(products.map(product => product.id === updatedProduct.id ? updatedProduct : product));
         e.preventDefault();
         navigate("/itemManager");
@@ -46,16 +48,17 @@ function ItemEdit(props) {
                                   encType="multipart/form-data">
                                 <div className="form-group"><label className="col-sm-2 control-label">商品id：</label>
                                     <div className="col-sm-10">
-                                        <input id="id" name="id" readOnly="readonly" type="text"
+                                        <input id="id" name="id" readOnly={readonly} type="text"
                                                className="form-control" value={formData.id}
-                                        onChange={handleChange}/>
+                                               onChange={handleChange}/>
                                     </div>
                                 </div>
                                 <div className="hr-line-dashed"></div>
 
                                 <div className="form-group"><label className="col-sm-2 control-label">标题：</label>
                                     <div className="col-sm-10">
-                                        <input id="title" name="title" type="text" className="form-control" value={formData.title}
+                                        <input id="title" name="title" type="text" className="form-control"
+                                               value={formData.title}
                                                onChange={handleChange}/>
                                     </div>
                                 </div>
