@@ -1,7 +1,10 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 function ItemHeader(props) {
+    const categories = useSelector(state => state.categories);
+
     return (
         <div className="col-lg-12">
             <div className="ibox float-e-margins">
@@ -22,7 +25,9 @@ function ItemHeader(props) {
                             </div>
                             <div className="col-sm-2 m-b-xs">
                                 <select name="cid" id="cid" className="form-control">
-                                    <option value="0">--请选择商品分类--</option>
+                                    {
+                                        categories.map(category => <option value={category}>{category}</option>)
+                                    }
                                 </select>
                             </div>
 
