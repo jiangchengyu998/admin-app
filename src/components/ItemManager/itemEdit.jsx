@@ -26,6 +26,8 @@ function ItemEdit(props) {
         console.log('handleSubmit', formData, e)
         dispatch(readonly ? updateItem(formData) : addItem(formData))
         //     setProducts(products.map(product => product.id === updatedProduct.id ? updatedProduct : product));
+        //     setProducts(products.map(product => product.id === updatedProduct.id ? updatedProduct : product));
+        //     setProducts(products.map(product => product.id === updatedProduct.id ? updatedProduct : product));
         e.preventDefault();
         navigate("/itemManager");
     };
