@@ -14,7 +14,7 @@ function ItemEdit(props) {
     console.log("ItemEdit", state)
     const [formData, setFormData] = useState(state);
     const handleChange = (e) => {
-        console.log('handleChange', formData,e)
+        console.log('handleChange', formData)
         const {name, value} = e.target;
         setFormData((prevFormData) => ({
             ...prevFormData, [name]: value
