@@ -3,7 +3,7 @@ import {ITEM_ADD, ITEM_DELETE, ITEM_UPDATE, SET_DATA} from './actions';
 // 定义初始状态
 const initialState = {
     data: '',
-    categories:['全部','手机','电脑'],
+    categories: ['手机', '电脑'],
     items: [
         {
             'id': '001',

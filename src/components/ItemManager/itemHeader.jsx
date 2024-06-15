@@ -24,18 +24,25 @@ function ItemHeader(props) {
                                        type="text"/>
                             </div>
                             <div className="col-sm-2 m-b-xs">
-                                <select name="cid" id="cid" className="form-control">
+
+                                <select name="category" id="cid" className="form-control">
+                                    <option key={''} value="">
+                                        Select an option
+                                    </option>
                                     {
-                                        categories.map(category => <option value={category}>{category}</option>)
+                                        categories.map(category => <option key={category}
+                                                                           value={category}>{category}</option>)
                                     }
                                 </select>
                             </div>
 
                             <div className="col-sm-2 m-b-xs">
-                                <input id="minPrice" name="minPrice" className="form-control" type="text" placeholder="最低价格"/>
+                                <input id="minPrice" name="minPrice" className="form-control" type="text"
+                                       placeholder="最低价格"/>
                             </div>
                             <div className="col-sm-2 m-b-xs">
-                                <input id="maxPrice" name="maxPrice" className="form-control" type="text" placeholder="最高价格"/>
+                                <input id="maxPrice" name="maxPrice" className="form-control" type="text"
+                                       placeholder="最高价格"/>
                             </div>
                             <div className="col-sm-2 m-b-xs">
                                 <button className="btn btn-primary btn-block" type="submit"><i
