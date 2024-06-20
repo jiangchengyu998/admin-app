@@ -3,6 +3,10 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {addItem, updateItem} from "../../store/actions";
 
+import { DatePicker } from 'antd';
+import moment from "moment";
+
+
 function ItemEdit(props) {
     const categories = useSelector(state => state.categories);
 
@@ -20,6 +24,14 @@ function ItemEdit(props) {
             ...prevFormData, [name]: value
         }));
     };
+
+    const onChange = (date, dateString) => {
+        console.log(date, dateString);
+        setFormData((prevFormData) => ({
+            ...prevFormData, ["updateTime"]: dateString
+        }));
+    };
+
     const navigate = useNavigate();
     const handleSubmit = (e) => {
         // 更新父组件的商品列表，后端更新数据
@@ -92,6 +104,11 @@ function ItemEdit(props) {
                                     <div className="col-sm-10">
                                         <input id="num" name="store" type="text" className="form-control"
                                                value={formData.store} onChange={handleChange}/>
+                                    </div>
+                                </div>
+                                <div className="form-group"><label className="col-sm-2 control-label">库存：</label>
+                                    <div className="col-sm-10">
+                                        <DatePicker format="YYYY-MM-DD" value={formData.updateTime ? moment(formData.updateTime, "YYYY-MM-DD") : null} onChange={onChange} needConfirm/>
                                     </div>
                                 </div>
 
