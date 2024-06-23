@@ -9,8 +9,8 @@ import {removeItem} from "../../store/actions";
 Modal.setAppElement('#root'); // 确保根元素设置正确
 
 function ItemList(props) {
-
     const products = useSelector(state => state.items);
+
     const dispatch = useDispatch();
 
     const [productToDelete, setProductToDelete] = useState(null);
