@@ -17,6 +17,15 @@ export const updateItem = (item) => ({
 })
 
 // 定义Action类型
+export const ITEM_UPDATE_ALL = 'ITEM_UPDATE_ALL';
+
+// 创建Action
+export const updateItemAll = (items) => ({
+    type: ITEM_UPDATE_ALL,
+    payload: items,
+})
+
+// 定义Action类型
 export const ITEM_DELETE = 'ITEM_DELETE';
 
 // 创建Action

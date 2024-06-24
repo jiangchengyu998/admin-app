@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {Link} from "react-router-dom";
-import {useSelector} from "react-redux";
-import {Button} from "antd";
+import {Link, useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {updateItemAll} from "../../store/actions";
 
 function ItemHeader(props) {
     const categories = useSelector(state => state.categories);
@@ -19,9 +19,13 @@ function ItemHeader(props) {
           ...prevState, [name]: value
       }))
     }
+    const dispatch = useDispatch();
+
+    const products = useSelector(state => state.items);
 
     const search = (e) => {
-      console.log('search', searchForm)
+        const newProducts = products.filter(product => searchForm.title === product.title)
+        dispatch(updateItemAll(newProducts))
     }
 
     return (

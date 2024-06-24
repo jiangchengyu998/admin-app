@@ -10,7 +10,7 @@ Modal.setAppElement('#root'); // 确保根元素设置正确
 
 function ItemList(props) {
     const products = useSelector(state => state.items);
-
+    console.log('ItemList',products);
     const dispatch = useDispatch();
 
     const [productToDelete, setProductToDelete] = useState(null);
@@ -31,16 +31,16 @@ function ItemList(props) {
         closeDeleteModal();
     };
 
-    const itemsPerPage = 5;  // 每页显示的商品数量
+    const itemsPerPage = 10;  // 每页显示的商品数量
     const [currentPage, setCurrentPage] = useState(1);
 
     // 获取当前页的商品
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentProducts = products.slice(indexOfFirstItem, indexOfLastItem);
-
     // 改变页码
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    console.log('currentProducts:',currentProducts)
 
     return (
         <div className="col-lg-12">
@@ -69,7 +69,8 @@ function ItemList(props) {
                             </thead>
                             <tbody>
                             {currentProducts.map((item, index) => (
-                                <tr key={item.id}>
+
+                                <tr key={index}>
                                     <td>{item.id}</td>
                                     <td>{item.title}</td>
                                     <td>{item.category}</td>

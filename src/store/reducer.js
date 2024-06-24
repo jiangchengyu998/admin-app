@@ -1,4 +1,4 @@
-import {ITEM_ADD, ITEM_DELETE, ITEM_UPDATE, SET_DATA} from './actions';
+import {ITEM_ADD, ITEM_DELETE, ITEM_UPDATE, ITEM_UPDATE_ALL, SET_DATA} from './actions';
 
 // 定义初始状态
 const initialState = {
@@ -89,6 +89,11 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 items: [...state.items, action.payload],
+            };
+        case ITEM_UPDATE_ALL:
+            return {
+                ...state,
+                items: action.payload,
             };
         default:
             return state;
