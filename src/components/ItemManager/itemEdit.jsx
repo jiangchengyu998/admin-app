@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {addItem, updateItem} from "../../store/actions";
 
 import { DatePicker } from 'antd';
-import moment from "moment";
+import dayjs from 'dayjs';
 
 
 function ItemEdit(props) {
@@ -108,7 +108,7 @@ function ItemEdit(props) {
                                 </div>
                                 <div className="form-group"><label className="col-sm-2 control-label">库存：</label>
                                     <div className="col-sm-10">
-                                        <DatePicker format="YYYY-MM-DD" value={formData.updateTime ? moment(formData.updateTime, "YYYY-MM-DD") : null} onChange={onChange} needConfirm/>
+                                        <DatePicker defaultValue={dayjs(formData.updateTime, "YYYY-MM-DD")} format={"YYYY-MM-DD"} onChange={onChange} needConfirm />
                                     </div>
                                 </div>
 
