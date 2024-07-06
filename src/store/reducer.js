@@ -86,6 +86,7 @@ const reducer = (state = initialState, action) => {
                 items: state.items.filter((item, index) => item.id !== action.payload.id),
             };
         case ITEM_ADD:
+            console.log(action)
             return {
                 ...state,
                 items: [...state.items, action.payload],

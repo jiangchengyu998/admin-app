@@ -1,17 +1,37 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Modal from 'react-modal';
 import "./styles.css";
 import {Link} from "react-router-dom";
 import {Pagination} from "./Pagination";
 import {useDispatch, useSelector} from "react-redux";
-import {removeItem} from "../../store/actions";
+import {addItem, removeItem} from "../../store/actions";
+import axios from "axios";
 
 Modal.setAppElement('#root'); // 确保根元素设置正确
 
 function ItemList(props) {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        // 定义一个异步函数来获取数据
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('api1/product/list');
+                console.log(response)
+                response.data.forEach(item => {dispatch(addItem(item))})
+            } catch (error) {
+                console.log(error)
+                // setError(error);
+            } finally {
+                // setLoading(false);
+            }
+        };
+
+        fetchData().then(r => console.log(r));
+    }, []); // 空依赖数组表示这个 effect 只在组件挂载和卸载时运行一次
+
     const products = useSelector(state => state.items);
     console.log('ItemList',products);
-    const dispatch = useDispatch();
+
 
     const [productToDelete, setProductToDelete] = useState(null);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
