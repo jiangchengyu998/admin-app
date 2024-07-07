@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
-import {Link, useNavigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {updateItemAll} from "../../store/actions";
+import React, {useEffect, useState} from 'react';
+import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
+import axios from "axios";
 
 function ItemHeader(props) {
+
     const categories = useSelector(state => state.categories);
 
     const [searchForm, setSearchForm] = useState({
@@ -19,13 +20,31 @@ function ItemHeader(props) {
           ...prevState, [name]: value
       }))
     }
-    const dispatch = useDispatch();
 
-    const products = useSelector(state => state.items);
+
+    const fetchData = async () => {
+        try {
+            const response = await axios.get(`api1/product/list?title=${searchForm.title}`);
+            console.log(response)
+            props.onMessageChange(response.data)
+            // response.data.forEach(item => {dispatch(addItem(item))})
+        } catch (error) {
+            console.log(error)
+            // setError(error);
+        } finally {
+            // setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        // 定义一个异步函数来获取数据
+        fetchData().then(r => console.log(r))
+    }, []); // 空依赖数组表示这个 effect 只在组件挂载和卸载时运行一次
+
 
     const search = (e) => {
-        const newProducts = products.filter(product => searchForm.title === product.title)
-        dispatch(updateItemAll(newProducts))
+        console.log("searchForm",searchForm);
+        fetchData().then(r => console.log(r))
     }
 
     return (
