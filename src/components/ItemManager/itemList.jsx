@@ -1,15 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import Modal from 'react-modal';
 import "./styles.css";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {Pagination} from "./Pagination";
-import {useDispatch, useSelector} from "react-redux";
-import {addItem, removeItem} from "../../store/actions";
+import {useDispatch} from "react-redux";
 import axios from "axios";
 
 Modal.setAppElement('#root'); // 确保根元素设置正确
 
 function ItemList(props) {
+    const [products, setProducts] = useState([]);
+
     const dispatch = useDispatch();
     useEffect(() => {
         // 定义一个异步函数来获取数据
@@ -17,7 +18,8 @@ function ItemList(props) {
             try {
                 const response = await axios.get('api1/product/list');
                 console.log(response)
-                response.data.forEach(item => {dispatch(addItem(item))})
+                // response.data.forEach(item => {dispatch(addItem(item))})
+                setProducts(response.data);
             } catch (error) {
                 console.log(error)
                 // setError(error);
@@ -29,8 +31,8 @@ function ItemList(props) {
         fetchData().then(r => console.log(r));
     }, []); // 空依赖数组表示这个 effect 只在组件挂载和卸载时运行一次
 
-    const products = useSelector(state => state.items);
-    console.log('ItemList',products);
+    // const products = useSelector(state => state.items);
+    console.log('ItemList', products);
 
 
     const [productToDelete, setProductToDelete] = useState(null);
@@ -44,11 +46,20 @@ function ItemList(props) {
         setIsDeleteModalOpen(false);
         setProductToDelete(null);
     };
-
+    const navigate = useNavigate();
+    const refreshPage = () => {
+        navigate(0);
+    };
     const handleDelete = () => {
-        dispatch(removeItem(productToDelete))
+
+        const response = axios.post(`api1/product/delete/${productToDelete.id}`);
+
+        console.log(response)
+
+        // dispatch(removeItem(productToDelete))
         // setProducts(products.filter(product => product.id !== productToDelete.id));
         closeDeleteModal();
+        refreshPage()
     };
 
     const itemsPerPage = 10;  // 每页显示的商品数量
@@ -60,7 +71,7 @@ function ItemList(props) {
     const currentProducts = products.slice(indexOfFirstItem, indexOfLastItem);
     // 改变页码
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
-    console.log('currentProducts:',currentProducts)
+    console.log('currentProducts:', currentProducts)
 
     return (
         <div className="col-lg-12">
@@ -102,9 +113,10 @@ function ItemList(props) {
                                         {/*<a title={"修改"}> */}
                                         {/*    <i className="fa fa-edit text-navy"></i>*/}
                                         {/*</a>*/}
-                                        <Link to="/itemEdit" state={{...item}}> 修改 <i className="fa fa-edit text-navy"/></Link>
+                                        <Link to="/itemEdit" state={{...item}}> 修改 <i
+                                            className="fa fa-edit text-navy"/></Link>
                                         &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <a onClick={()=>openDeleteModal(item)} title={"删除"}>
+                                        <a onClick={() => openDeleteModal(item)} title={"删除"}>
                                             <i className="fa fa-trash-o text-navy"></i>
                                         </a>
                                     </td>

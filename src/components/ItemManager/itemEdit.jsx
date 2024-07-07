@@ -1,20 +1,20 @@
 import React, {useState} from 'react';
 import {useLocation, useNavigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {addItem, updateItem} from "../../store/actions";
+import {useSelector} from "react-redux";
 
-import { DatePicker } from 'antd';
+import {DatePicker} from 'antd';
 import dayjs from 'dayjs';
+import axios from "axios";
 
 
 function ItemEdit(props) {
     const categories = useSelector(state => state.categories);
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     // 父组件传进来的
     let {state} = useLocation()
     let readonly = state !== null
-    state = state === null ? {'id': '9', 'title': ""} : state
+    state = state === null ? {'id': '', 'title': ""} : state
     console.log("ItemEdit", state)
     const [formData, setFormData] = useState(state);
     const handleChange = (e) => {
@@ -33,10 +33,12 @@ function ItemEdit(props) {
     };
 
     const navigate = useNavigate();
-    const handleSubmit = (e) => {
+
+    const handleSubmit =  (e) => {
         // 更新父组件的商品列表，后端更新数据
         console.log('handleSubmit', formData, e)
-        dispatch(readonly ? updateItem(formData) : addItem(formData))
+        const response = axios.post('api1/product/add', formData);
+        // dispatch(readonly ? updateItem(formData) : addItem(formData))
         e.preventDefault();
         navigate("/itemManager");
     };
