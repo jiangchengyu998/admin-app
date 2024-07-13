@@ -30,8 +30,6 @@ function ItemList(props) {
     const handleDelete = () => {
         const response = axios.post(`api1/product/delete/${productToDelete.id}`);
         console.log(response)
-        // dispatch(removeItem(productToDelete))
-        // setProducts(products.filter(product => product.id !== productToDelete.id));
         closeDeleteModal();
         refreshPage()
     };

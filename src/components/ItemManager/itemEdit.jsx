@@ -14,7 +14,7 @@ function ItemEdit(props) {
     // 父组件传进来的
     let {state} = useLocation()
     let readonly = state !== null
-    state = state === null ? {'id': '', 'title': ""} : state
+    state = state === null ? {'id': '', 'title': '',"updateTime": dayjs().format("YYYY-MM-DD")} : state
     console.log("ItemEdit", state)
     const [formData, setFormData] = useState(state);
     const handleChange = (e) => {
@@ -47,8 +47,6 @@ function ItemEdit(props) {
     const close = (e) => {
         navigate("/itemManager");
     };
-
-    const defaultDate = formData.updateTime ? dayjs(formData.updateTime, "YYYY-MM-DD") : dayjs();
 
 
     return (<div className="wrapper wrapper-content animated fadeInRight">
@@ -111,10 +109,9 @@ function ItemEdit(props) {
                                                value={formData.store} onChange={handleChange}/>
                                     </div>
                                 </div>
-                                <div className="form-group"><label className="col-sm-2 control-label">库存：</label>
+                                <div className="form-group"><label className="col-sm-2 control-label">更新时间：</label>
                                     <div className="col-sm-10">
-                                        <DatePicker defaultValue={defaultDate} format={"YYYY-MM-DD"} onChange={onChange} needConfirm />
-                                    </div>
+                                        <DatePicker defaultValue={dayjs(formData.updateTime, "YYYY-MM-DD")} format={"YYYY-MM-DD"} onChange={onChange} needConfirm />                                    </div>
                                 </div>
 
                                 <div className="hr-line-dashed"></div>
