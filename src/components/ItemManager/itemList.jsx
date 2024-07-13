@@ -11,8 +11,7 @@ function ItemList(props) {
     const productPage = props.productPage;
     const products = productPage.content;
 
-    // const products = useSelector(state => state.items);
-
+    // 删除逻辑
     const [productToDelete, setProductToDelete] = useState(null);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -37,16 +36,11 @@ function ItemList(props) {
         refreshPage()
     };
 
-    const itemsPerPage = productPage.page.size;  // 每页显示的商品数量
-    const [currentPage, setCurrentPage] = useState(productPage.number +1);
-
-    // 获取当前页的商品
-    // const indexOfLastItem = currentPage * itemsPerPage;
-    // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    // const currentProducts = products.slice(indexOfFirstItem, indexOfLastItem);
-    const currentProducts = products;
     // 改变页码
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    const paginate = (pageNumber) => {
+        console.log("pageNumber",pageNumber)
+        props.handlePage({"pageNumber": pageNumber});
+    };
 
     return (
         <div className="col-lg-12">
@@ -74,7 +68,7 @@ function ItemList(props) {
                             </tr>
                             </thead>
                             <tbody>
-                            {currentProducts.map((item, index) => (
+                            {products.map((item, index) => (
 
                                 <tr key={index}>
                                     <td>{item.id}</td>
@@ -84,10 +78,6 @@ function ItemList(props) {
                                     <td>{item.store}</td>
                                     <td>{item.updateTime}</td>
                                     <td>
-
-                                        {/*<a title={"修改"}> */}
-                                        {/*    <i className="fa fa-edit text-navy"></i>*/}
-                                        {/*</a>*/}
                                         <Link to="/itemEdit" state={{...item}}> 修改 <i
                                             className="fa fa-edit text-navy"/></Link>
                                         &nbsp;&nbsp;&nbsp;&nbsp;
@@ -100,10 +90,10 @@ function ItemList(props) {
                             </tbody>
                         </table>
                         <Pagination
-                            itemsPerPage={itemsPerPage}
+                            itemsPerPage={productPage.page.size}
                             totalItems={productPage.page.totalElements}
                             paginate={paginate}
-                            currentPage={currentPage}
+                            currentPage={productPage.number +1}
                         />
                         <Modal
                             isOpen={isDeleteModalOpen}

@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
-import axios from "axios";
 
 function ItemHeader(props) {
 
@@ -21,31 +20,8 @@ function ItemHeader(props) {
       }))
     }
 
-
-    const fetchData = async () => {
-        try {
-            const response = await axios.get(`api1/product/page?title=${searchForm.title}`);
-            console.log(response)
-            props.onMessageChange(response.data)
-            return response.data;
-            // response.data.forEach(item => {dispatch(addItem(item))})
-        } catch (error) {
-            console.log(error)
-            // setError(error);
-        } finally {
-            // setLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        // 定义一个异步函数来获取数据
-        fetchData().then(r => console.log("useEffect",r))
-    }, []); // 空依赖数组表示这个 effect 只在组件挂载和卸载时运行一次
-
-
     const search = (e) => {
-        console.log("searchForm",searchForm);
-        fetchData().then(r => console.log("search",r))
+        props.handleSearchFormChange(searchForm)
     }
 
     return (

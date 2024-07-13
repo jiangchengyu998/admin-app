@@ -38,7 +38,7 @@ function ItemEdit(props) {
         // 更新父组件的商品列表，后端更新数据
         console.log('handleSubmit', formData, e)
         const response = axios.post('api1/product/add', formData);
-        response.then(r => console.log("修改/添加成：",r));
+        response.then(r => console.log("修改/添加成了：",r));
         // dispatch(readonly ? updateItem(formData) : addItem(formData))
         e.preventDefault();
         navigate("/itemManager");
@@ -47,6 +47,8 @@ function ItemEdit(props) {
     const close = (e) => {
         navigate("/itemManager");
     };
+
+    const defaultDate = formData.updateTime ? dayjs(formData.updateTime, "YYYY-MM-DD") : dayjs();
 
 
     return (<div className="wrapper wrapper-content animated fadeInRight">
@@ -111,7 +113,7 @@ function ItemEdit(props) {
                                 </div>
                                 <div className="form-group"><label className="col-sm-2 control-label">库存：</label>
                                     <div className="col-sm-10">
-                                        <DatePicker defaultValue={dayjs(formData.updateTime, "YYYY-MM-DD")} format={"YYYY-MM-DD"} onChange={onChange} needConfirm />
+                                        <DatePicker defaultValue={defaultDate} format={"YYYY-MM-DD"} onChange={onChange} needConfirm />
                                     </div>
                                 </div>
 
