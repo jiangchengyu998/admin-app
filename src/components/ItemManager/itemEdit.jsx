@@ -38,6 +38,7 @@ function ItemEdit(props) {
         // 更新父组件的商品列表，后端更新数据
         console.log('handleSubmit', formData, e)
         const response = axios.post('api1/product/add', formData);
+        response.then(r => console.log("修改/添加成：",r));
         // dispatch(readonly ? updateItem(formData) : addItem(formData))
         e.preventDefault();
         navigate("/itemManager");

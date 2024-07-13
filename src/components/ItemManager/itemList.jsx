@@ -8,12 +8,10 @@ import axios from "axios";
 Modal.setAppElement('#root'); // 确保根元素设置正确
 
 function ItemList(props) {
-    console.log("ItemList-props", props)
-    const products = props.products;
+    const productPage = props.productPage;
+    const products = productPage.content;
 
     // const products = useSelector(state => state.items);
-    console.log('ItemList', products);
-
 
     const [productToDelete, setProductToDelete] = useState(null);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -39,16 +37,16 @@ function ItemList(props) {
         refreshPage()
     };
 
-    const itemsPerPage = 10;  // 每页显示的商品数量
-    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = productPage.page.size;  // 每页显示的商品数量
+    const [currentPage, setCurrentPage] = useState(productPage.number +1);
 
     // 获取当前页的商品
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentProducts = products.slice(indexOfFirstItem, indexOfLastItem);
+    // const indexOfLastItem = currentPage * itemsPerPage;
+    // const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    // const currentProducts = products.slice(indexOfFirstItem, indexOfLastItem);
+    const currentProducts = products;
     // 改变页码
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
-    console.log('currentProducts:', currentProducts)
 
     return (
         <div className="col-lg-12">
@@ -103,7 +101,7 @@ function ItemList(props) {
                         </table>
                         <Pagination
                             itemsPerPage={itemsPerPage}
-                            totalItems={products.length}
+                            totalItems={productPage.page.totalElements}
                             paginate={paginate}
                             currentPage={currentPage}
                         />

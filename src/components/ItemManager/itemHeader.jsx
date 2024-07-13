@@ -24,9 +24,10 @@ function ItemHeader(props) {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get(`api1/product/list?title=${searchForm.title}`);
+            const response = await axios.get(`api1/product/page?title=${searchForm.title}`);
             console.log(response)
             props.onMessageChange(response.data)
+            return response.data;
             // response.data.forEach(item => {dispatch(addItem(item))})
         } catch (error) {
             console.log(error)
@@ -38,13 +39,13 @@ function ItemHeader(props) {
 
     useEffect(() => {
         // 定义一个异步函数来获取数据
-        fetchData().then(r => console.log(r))
+        fetchData().then(r => console.log("useEffect",r))
     }, []); // 空依赖数组表示这个 effect 只在组件挂载和卸载时运行一次
 
 
     const search = (e) => {
         console.log("searchForm",searchForm);
-        fetchData().then(r => console.log(r))
+        fetchData().then(r => console.log("search",r))
     }
 
     return (

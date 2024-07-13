@@ -4,17 +4,20 @@ import ItemList from "./itemList";
 
 function ItemManager(props) {
 
-    const [products, setProducts] = useState([]);
+    const [productPage, setProductPage] = useState({
+        "content": [],
+        "page": {}
+    });
     // 父组件的回调函数
-    const handleMessageChange = (products) => {
-        setProducts(products);
+    const handleMessageChange = (productPage) => {
+        setProductPage(productPage);
     };
 
     return (
         <div className="wrapper wrapper-content animated fadeInRight">
             <div className="row">
                 <ItemHeader onMessageChange={handleMessageChange}/>
-                <ItemList products={products} />
+                <ItemList productPage={productPage} />
             </div>
         </div>
     );
