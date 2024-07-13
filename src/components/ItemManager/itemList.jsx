@@ -2,14 +2,29 @@ import React, {useState} from 'react';
 import Modal from 'react-modal';
 import "./styles.css";
 import {Link, useNavigate} from "react-router-dom";
-import {Pagination} from "./Pagination";
+// import {Pagination} from "./Pagination";
 import axios from "axios";
+import {Pagination} from "antd";
 
 Modal.setAppElement('#root'); // 确保根元素设置正确
 
 function ItemList(props) {
     const productPage = props.productPage;
+    console.log("productPage",productPage);
+    //number
+    // :
+    // 0
+    // size
+    // :
+    // 2
+    // totalElements
+    // :
+    // 9
+    // totalPages
+    // :
+    // 5
     const products = productPage.content;
+    const [current, setCurrent] = useState(productPage.page.number +1 )
 
     // 删除逻辑
     const [productToDelete, setProductToDelete] = useState(null);
@@ -37,6 +52,7 @@ function ItemList(props) {
     // 改变页码
     const paginate = (pageNumber) => {
         console.log("pageNumber",pageNumber)
+        setCurrent(pageNumber)
         props.handlePage({"pageNumber": pageNumber});
     };
 
@@ -87,11 +103,16 @@ function ItemList(props) {
                             ))}
                             </tbody>
                         </table>
-                        <Pagination
-                            itemsPerPage={productPage.page.size}
-                            totalItems={productPage.page.totalElements}
-                            paginate={paginate}
-                            currentPage={productPage.number +1}
+                        {/*<Pagination*/}
+                        {/*    itemsPerPage={productPage.page.size}*/}
+                        {/*    totalItems={productPage.page.totalElements}*/}
+                        {/*    paginate={paginate}*/}
+                        {/*    currentPage={productPage.number +1}*/}
+                        {/*/>*/}
+                        <Pagination current={current} onChange={paginate}
+                                    pageSize={productPage.page.size}
+                                    total={productPage.page.totalElements}
+                                    showTotal={(total) => `Total ${total} items`}
                         />
                         <Modal
                             isOpen={isDeleteModalOpen}

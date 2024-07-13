@@ -7,7 +7,7 @@ function ItemManager(props) {
 
     const [productPage, setProductPage] = useState({
         "content": [],
-        "page": {}
+        "page": {"totalElements":0,"number":0}
     });
 
     const [searchForm, setSearchForm] = useState({title:'',category:'',minPrice:'',maxPrice:''});
