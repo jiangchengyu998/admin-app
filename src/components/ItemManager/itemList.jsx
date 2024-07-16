@@ -10,19 +10,9 @@ Modal.setAppElement('#root'); // 确保根元素设置正确
 
 function ItemList(props) {
     const productPage = props.productPage;
+    var name = sessionStorage.getItem("name");
+    console.log(name)
     console.log("productPage",productPage);
-    //number
-    // :
-    // 0
-    // size
-    // :
-    // 2
-    // totalElements
-    // :
-    // 9
-    // totalPages
-    // :
-    // 5
     const products = productPage.content;
     const [current, setCurrent] = useState(productPage.page.number +1 )
 

@@ -28,6 +28,7 @@ function ItemManager(props) {
     };
 
     useEffect(() => {
+        sessionStorage.setItem("name","hanke")
         // 定义一个异步函数来获取数据
         fetchData().then(r => console.log("useEffect",r))
     }, [searchForm,page]); // 空依赖数组表示这个 effect 只在组件挂载和卸载时运行一次
